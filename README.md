@@ -292,8 +292,12 @@ python main_tool.py network
 # Schneller Netzwerk-Check
 python main_tool.py network --quick
 
-# Monitoring
+# Monitoring (begrenzt)
 python main_tool.py monitor --duration 10
+
+# Monitoring (unbegrenzt - läuft bis Ctrl+C)
+python main_tool.py monitor
+python main_tool.py monitor --unlimited
 
 # Empfehlungen generieren
 python main_tool.py recommend
@@ -327,6 +331,13 @@ python main_tool.py --full --log-hours 48 --monitor-duration 30
 **Parameter-Erklärung:**
 - `--log-hours 48`: Analysiert HA-Logs der **letzten 48 Stunden** (vergangene Probleme)
 - `--monitor-duration 30`: Führt **30 Minuten** Live-Monitoring durch (aktuelle Performance)
+
+**Unbegrenztes Monitoring:**
+```bash
+# Läuft bis manuell gestoppt (Ctrl+C)
+python main_tool.py monitor
+python main_tool.py monitor --unlimited
+```
 
 ### 4. Empfehlungen umsetzen
 ```bash

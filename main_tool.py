@@ -123,9 +123,12 @@ class ModbusDiagnosticsTool:
             logger.error(f"❌ Recommendation generation failed: {e}")
             raise
     
-    def start_monitoring(self, duration_minutes: int = 60):
+    def start_monitoring(self, duration_minutes: Optional[int] = None):
         """Start continuous Modbus monitoring."""
-        logger.info(f"🚀 Starting monitoring for {duration_minutes} minutes")
+        if duration_minutes is None:
+            logger.info("🚀 Starting monitoring (unlimited - press Ctrl+C to stop)")
+        else:
+            logger.info(f"🚀 Starting monitoring for {duration_minutes} minutes")
         
         try:
             config = MonitorConfig()
@@ -144,8 +147,16 @@ class ModbusDiagnosticsTool:
             self.modbus_monitor.start_monitoring()
             self.monitoring_active = True
             
-            # Run for specified duration
-            time.sleep(duration_minutes * 60)
+            if duration_minutes is None:
+                # Unlimited monitoring - wait for keyboard interrupt
+                try:
+                    while True:
+                        time.sleep(1)
+                except KeyboardInterrupt:
+                    logger.info("🛑 Monitoring stopped by user (Ctrl+C)")
+            else:
+                # Run for specified duration
+                time.sleep(duration_minutes * 60)
             
             self.stop_monitoring()
             
@@ -588,7 +599,8 @@ def main():
     
     # Monitoring command
     monitor_parser = subparsers.add_parser("monitor", help="Run monitoring")
-    monitor_parser.add_argument("--duration", type=int, default=10, help="Duration in minutes")
+    monitor_parser.add_argument("--duration", type=int, help="Duration in minutes (omit for unlimited)")
+    monitor_parser.add_argument("--unlimited", action="store_true", help="Run unlimited monitoring (same as omitting --duration)")
     
     # Recommendations command
     rec_parser = subparsers.add_parser("recommend", help="Generate recommendations")
@@ -631,8 +643,12 @@ def main():
                 print(f"✅ Network diagnostics completed: Health score {result.network_health_score:.1f}/100")
                 
         elif args.command == "monitor":
-            print(f"🚀 Starting monitoring for {args.duration} minutes...")
-            tool.start_monitoring(args.duration)
+            if args.unlimited or args.duration is None:
+                print("🚀 Starting unlimited monitoring (press Ctrl+C to stop)...")
+                tool.start_monitoring(None)
+            else:
+                print(f"🚀 Starting monitoring for {args.duration} minutes...")
+                tool.start_monitoring(args.duration)
             
         elif args.command == "recommend":
             result = tool.generate_recommendations()

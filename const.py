@@ -14,7 +14,7 @@ USE_SECONDARY_AS_PRIMARY = False
 
 # Host Access Mode Configuration
 # Options: 'fallback', 'alternating', 'both', 'primary_only', 'secondary_only'
-HOST_ACCESS_MODE = 'both'  # Test Python Simulator only
+HOST_ACCESS_MODE = 'fallback'  # Test Python Simulator only
 
 # Primary Modbus Host (Real Lambda Heat Pump)
 PRIMARY_HOST = "192.168.178.125"
