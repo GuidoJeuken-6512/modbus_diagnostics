@@ -1,0 +1,38 @@
+# Modbus Diagnostics Tool Requirements
+# =====================================
+
+# Core Modbus communication library
+pymodbus==2.5.3
+
+# Dependencies automatically installed with pymodbus 2.5.3:
+# - pyserial>=3.4 (imported as 'serial' module)
+# - six>=1.17.0 (Python 2/3 compatibility)
+
+# System requirements (install via package manager):
+# Ubuntu/Debian: sudo apt install python3-tk
+# CentOS/RHEL: sudo yum install python3-tkinter
+# Arch: sudo pacman -S tk
+
+# Standard library modules (included with Python 3.6+):
+# - sqlite3 (database operations)
+# - threading (concurrent operations)
+# - subprocess (ping tests)
+# - socket (network connectivity tests)
+# - logging (logging system)
+# - datetime (timestamps and time operations)
+# - json (data export/import)
+# - os (file and directory operations)
+# - time (timing and delays)
+# - random (interval randomization)
+# - argparse (command line interface)
+# - tkinter (GUI interface - requires system package)
+# - dataclasses (data structures - Python 3.7+)
+# - typing (type hints)
+# - collections (advanced data collections)
+# - concurrent.futures (parallel processing)
+
+# Installation notes:
+# 1. Create virtual environment: python3 -m venv .venv
+# 2. Activate: source .venv/bin/activate
+# 3. Install system dependencies: sudo apt install python3-tk
+# 4. Install Python packages: pip install -r requirements.txt

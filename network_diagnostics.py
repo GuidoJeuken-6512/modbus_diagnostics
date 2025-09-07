@@ -13,7 +13,7 @@ from dataclasses import dataclass
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import logging
 
-from pymodbus.client import ModbusTcpClient
+from pymodbus.client.sync import ModbusTcpClient
 from pymodbus.exceptions import ModbusException, ConnectionException
 
 from const import (

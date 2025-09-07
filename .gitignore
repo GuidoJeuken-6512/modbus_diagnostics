@@ -58,9 +58,13 @@ data/
 # Reports and Backups
 reports/
 backups/
-*.txt
 *.csv
 *.json
+# Keep important text files
+!requirements.txt
+!README.txt
+!CHANGELOG.txt
+!LICENSE.txt
 
 # Temporary files
 *.tmp

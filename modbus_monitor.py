@@ -14,7 +14,7 @@ from collections import defaultdict, deque
 import sqlite3
 import json
 
-from pymodbus.client import ModbusTcpClient
+from pymodbus.client.sync import ModbusTcpClient
 from pymodbus.exceptions import ModbusException, ConnectionException
 
 from const import (
